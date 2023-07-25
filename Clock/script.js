@@ -1,23 +1,23 @@
-let hr = document.getElementById('hour');
-let min = document.getElementById('min');
-let sec = document.getElementById('sec');
+const time = document.getElementById('time');
+const timeformat = document.getElementById('timeformat');
 
-function displayTime(){
-    let date = new Date();
+document.addEventListener('DOMContentLoaded', ()=>{
+    setInterval(showTime, 1000)
+});
 
-    // Getting hour, mins, secs from date
-    let hh = date.getHours();
-    let mm = date.getMinutes();
-    let ss = date.getSeconds();
+const showTime= () =>{
+    let date = new Date ();
 
-    let hRotation = 30*hh + mm/2;
-    let mRotation = 6*mm;
-    let sRotation = 6*ss;
+    let hr = date.getHours();
+    let mins = date.getMinutes();
+    let secs = date.getSeconds();
+    
+    hr = hr<10 ? `0=${hr}` : hr;
+    mins = mins<10 ? `0=${mins}` : mins;
+    secs = secs<10 ? `0=${secs}` : secs;
 
-    hr.style.transform = `rotate(${hRotation}deg)`;
-    min.style.transform = `rotate(${mRotation}deg)`;
-    sec.style.transform = `rotate(${sRotation}deg)`;
+    time.innerHTML = `${hr} : ${mins} : ${secs}`;
 
+    timeformat.innerHTML = hr>12 ? "PM" : "AM";
+    //console.log("hours "+ hr + "mins " + mins + "secs" + secs);
 }
-
-setInterval(displayTime, 1000);
